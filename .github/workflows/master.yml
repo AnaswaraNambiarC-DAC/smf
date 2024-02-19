@@ -92,8 +92,7 @@ jobs:
         run: make docker-build
 
       - name: Log in to Docker Hub
-        run: echo "Anaswara@cdac123" | docker login -u "ios5g" --password-stdin
-
+        run: echo "${{ secrets.PASSWORD1 }}" | docker login -u "${{ secrets.USERNAME1 }}" --password-stdin
       - name: Tag Docker image
         run: docker tag 5gc-smf:0.0.1-dev ios5g/smf
 
