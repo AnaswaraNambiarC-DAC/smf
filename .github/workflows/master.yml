@@ -32,7 +32,6 @@ jobs:
 
   license-check:
     runs-on: self-hosted
-    needs: lint
     steps:
       - uses: actions/checkout@v4
 
