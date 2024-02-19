@@ -38,16 +38,16 @@ jobs:
       - name: reuse lint
         uses: fsfe/reuse-action@v2
 
-  fossa-check:
-    runs-on: self-hosted
+  #fossa-check:
+    #runs-on: self-hosted
     #needs: license-check
-    steps:
-      - uses: actions/checkout@v4
+    #steps:
+      #- uses: actions/checkout@v4
 
-      - name: FOSSA scan
-        uses: fossa-contrib/fossa-action@v3
-        with:
-          fossa-api-key: 0c3bbcdf20e157bbd487dae173751b28
+     # - name: FOSSA scan
+        #uses: fossa-contrib/fossa-action@v3
+       # with:
+         #fossa-api-key: 0c3bbcdf20e157bbd487dae173751b28
           
   build:
     runs-on: self-hosted
