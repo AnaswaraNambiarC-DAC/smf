@@ -65,7 +65,7 @@ jobs:
 
   unit-tests:
     runs-on: self-hosted
-    #needs: build
+    needs: build
     steps:
       - uses: actions/checkout@v4
 
@@ -78,7 +78,7 @@ jobs:
         
   docker-build:
     runs-on: self-hosted
-    #needs: unit-tests
+    needs: unit-tests
     steps:
       - uses: actions/checkout@v4
 
@@ -92,7 +92,7 @@ jobs:
         run: make docker-build
 
       - name: Log in to Docker Hub
-        run: echo "${{ secrets.PASSWORD }}" | docker login -u "${{ secrets.USERNAME }}" --password-stdin
+        run: echo "Anaswara@cdac123" | docker login -u "ios5g" --password-stdin
 
       - name: Tag Docker image
         run: docker tag 5gc-smf:0.0.1-dev ios5g/smf
