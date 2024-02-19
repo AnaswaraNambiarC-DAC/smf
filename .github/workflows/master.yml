@@ -13,7 +13,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
 
@@ -25,7 +25,7 @@ jobs:
         run: go build
 
   build-upfadapter:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     defaults:
       run:
         working-directory: ./upfadapter
@@ -40,20 +40,32 @@ jobs:
         run: go build
 
   docker-build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+    needs: unit-tests
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
-
-      - name: Build and push Docker image
+          
+      - uses: docker/setup-buildx-action@v3.0.0
+      
+      - name: Build Docker image
         run: make docker-build
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.PASSWORD }}" | docker login -u "${{ secrets.USERNAME }}" --password-stdin
+
+      - name: Tag Docker image
+        run: docker tag 5gc-smf:0.0.1-dev ios5g/smf
+
+      - name: Push Docker image to Docker Hub
+        run: docker push ios5g/smf
 
   lint:
     name: lint
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
 
@@ -68,7 +80,7 @@ jobs:
           args: -v --config ./.golangci.yml
 
   license-check:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
 
@@ -86,7 +98,7 @@ jobs:
           fossa-api-key: 0c3bbcdf20e157bbd487dae173751b28
 
   unit-tests:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
 
