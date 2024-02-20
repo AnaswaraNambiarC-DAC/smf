@@ -52,8 +52,8 @@ jobs:
           
   build:
     runs-on: self-hosted
-    #needs: fossa-check
-    needs: lint
+    needs: fossa-check
+    #needs: lint
     steps:
       - uses: actions/checkout@v4
 
