@@ -394,7 +394,7 @@ func (smf *SMF) Start() {
 }
 
 func (smf *SMF) Terminate() {
-	logger.InitLog.Infof("Terminating SMF...")
+	logger.InitLog.Infof("Terminating SMF....")
 	// deregister with NRF
 	problemDetails, err := consumer.SendDeregisterNFInstance()
 	if problemDetails != nil {
