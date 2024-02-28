@@ -265,7 +265,7 @@ func (smf *SMF) FilterCli(c *cli.Context) (args []string) {
 }
 
 func (smf *SMF) Start() {
-	initLog.Infoln("SMF app initialising...")
+	initLog.Infoln("SMF app initialising... by Anaswara")
 
 	//Initialise channel to stop SMF
 	signalChannel := make(chan os.Signal, 1)
